@@ -1,6 +1,14 @@
 # RESTFUL API for October CMS OFFLINE MALL plugin
 
 
+Plugins Required:
+- RainLab.User
+- RainLab.Translate
+- OFFLINe.Mall
+- OFFLINE.sitesearch
+- RDluders.JWTAuth
+- RDluders.CORS
+
 **Based on https://github.com/SaifurRahmanMohsin/oc-rest-plugin**
 
 
