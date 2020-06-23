@@ -8,8 +8,18 @@ class Plugin extends PluginBase
 {
     use BootSettings;
     use BootExtensions;
-
-    public $require = ['OFFLINE.Mall', 'RLuders.CORS', 'RLuders.JWTAuth'];
+    /**
+     * Plugin dependencies.
+     *
+     * @var array
+     */
+    public $require = [
+        'RainLab.User',
+        'OFFLINE.Mall',
+        'OFFLINE.SiteSearch',
+        'RLuders.CORS',
+        'RLuders.JWTAuth'
+    ];
 
     public function boot()
     {

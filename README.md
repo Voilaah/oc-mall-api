@@ -3,11 +3,10 @@
 
 Plugins Required:
 - RainLab.User
-- RainLab.Translate
-- OFFLINe.Mall
-- OFFLINE.sitesearch
-- RDluders.JWTAuth
-- RDluders.CORS
+- OFFLINE.Mall
+- OFFLINE.SiteSearch
+- RLuders.JWTAuth
+- RLuders.CORS
 
 **Based on https://github.com/SaifurRahmanMohsin/oc-rest-plugin**
 
