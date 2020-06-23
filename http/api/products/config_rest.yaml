@@ -1,0 +1,35 @@
+# ===================================
+#  Rest Behavior Config
+# ===================================
+
+
+# Allowed Rest Actions
+allowedActions:
+  index:
+      pageSize: 15
+      sortOrder: latest
+      relations:
+        - variants
+        - categories
+        - brand
+        - image_sets
+  store:
+  show:
+      relations:
+        - variants
+        - services
+        - categories
+        - brand
+        - reviews
+        - image_sets
+  update:
+  destroy:
+
+# Model Class name
+modelClass: OFFLINE\Mall\Models\Product
+
+# transformer Class name
+transformerClass: Voilaah\MallApi\Classes\Transformers\ProductTransformer
+
+# Verb Method Prefix
+prefix: api

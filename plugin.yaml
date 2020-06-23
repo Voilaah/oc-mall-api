@@ -1,0 +1,10 @@
+plugin:
+    name: 'voilaah.mallapi::lang.plugin.name'
+    description: 'voilaah.mallapi::lang.plugin.description'
+    author: Voilaah
+    icon: oc-icon-code
+    homepage: 'https://github.com/Voilaah/oc-mall-api'
+permissions:
+    voilaah.mallapi.settings.manage:
+        tab: 'Mall API'
+        label: 'Manage the Mall API settings'

@@ -1,0 +1,15 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    client_id:
+        tab: voilaah.mallapi::lang.api_settings.general
+        span: left
+        default: 9gn4694a6937DPLLc54JR3bd5PW2Gx2XaXgccrbo6jG0lqgK
+        label: voilaah.mallapi::lang.api_settings.client_id
+    client_secret:
+        tab: voilaah.mallapi::lang.api_settings.general
+        default: l1QgnuGeMoRgHVuFwRFyJBcifSmQC1fiPaliVN4xWoS07rJDjqmOwva5vLK6NOk9
+        span: left
+        label: voilaah.mallapi::lang.api_settings.client_secret
