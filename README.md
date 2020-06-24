@@ -56,4 +56,5 @@ Plugins Required:
 - [ ] `GET /api/cart`
 - [ ] `POST /api/cart`
 - [ ] `PUT /api/cart/{cartItemId}`
+- [ ] `DELETE /api/cart/{cartItemId}`
 - [ ] `POST /api/checkout`
