@@ -26,7 +26,11 @@ Route::group([
     });
 
     // Simple Resources related
+    Route::get('products/{recordId}', 'Products@show')
+        ->where('recordId', '.*')
+        ->name('products.show');
     Route::resource('products', 'Products');
+
     Route::get('categories/{recordId}', 'Categories@show')
         ->where('recordId', '.*')
         ->name('categories.show');

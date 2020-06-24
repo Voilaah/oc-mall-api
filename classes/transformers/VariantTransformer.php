@@ -20,12 +20,14 @@ class VariantTransformer extends TransformerAbstract
     public $availableIncludes = [
         'price',
         'prices',
+        'properties',
         'categories',
         'accessories',
         'temp_images',
         'downloads',
         'product',
         'tax',
+        'image_sets',
     ];
 
     protected $productModel;
@@ -43,12 +45,14 @@ class VariantTransformer extends TransformerAbstract
 
         return [
             'id' => (int)$model->id,
+            'hash_id' => (string)$model->hash_id,
+            'slug' => (string)$model->hash_id,
             'name' => (string)$model->name,
-            'slug' => (string)$model->slug,
             'published' => (boolean)$model->published,
             'allow_out_of_stock_purchases' => (boolean)$model->allow_out_of_stock_purchases,
             'stock' => (int)$model->stock,
             'weight' => (double)$model->weight,
+            'url' =>  route('products.show', ['recordId' => $model->slug . '/' . $model->hash_id] ),
             // 'price' => new PriceTransformer($model->price)
 
         ];
