@@ -4,19 +4,24 @@ namespace Voilaah\MallApi\Classes\Transformers;
 
 
 use OFFLINE\Mall\Models\Category;
+use OFFLINE\Mall\Models\PropertyGroup;
 use League\Fractal\TransformerAbstract;
+use Voilaah\MallApi\Classes\Transformers\ImageTransformer;
 use Voilaah\MallApi\Classes\Transformers\ProductTransformer;
+use Voilaah\MallApi\Classes\Transformers\PropertyGroupTransformer;
 
 class CategoryTransformer extends TransformerAbstract
 {
     /**
      * @var array
      */
-    protected $defaultIncludes = ['children'];
+    protected $defaultIncludes = [];
 
     public $availableIncludes = [
         'children',
         'products',
+        'image',
+        'property_groups'
     ];
     /**
      * Turn this model object into a generic array.
@@ -58,5 +63,38 @@ class CategoryTransformer extends TransformerAbstract
     {
         if ($model->products->count() > 0 )
             return $this->collection($model->products, new ProductTransformer());
+    }
+
+          /**
+     * Embed Image
+     *
+     * @return League\Fractal\Resource\Item
+     */
+    public function includeImage($model)
+    {
+        if ($model->image)
+            return $this->item($model->image, new ImageTransformer);
+    }
+
+     /**
+     * Get all PropertyGroups in this Category.
+     * code from Mall component ProductFilters method getPropertyGroups()
+     * @return mixed
+     */
+    protected function includePropertyGroups($model)
+    {
+        $property_groups = $model
+            ->load('property_groups.translations')
+            ->inherited_property_groups
+            ->load('filterable_properties.translations')
+            ->reject(function (PropertyGroup $group) {
+                return $group->filterable_properties->count() < 1;
+            })->sortBy('pivot.sort_order');
+
+            // trace_log($property_groups->toArray());
+
+        if ($property_groups->count() > 0)
+            return $this->collection($property_groups, new PropertyGroupTransformer());
+
     }
 }

@@ -194,6 +194,7 @@ class RestController extends ControllerBehavior
         try {
             $model = $this->controller->findModelObject($recordId);
             $this->transformer = $this->controller->createTransformerObject();
+
             $this->parseIncludes($relations);
 
             // Get relations too

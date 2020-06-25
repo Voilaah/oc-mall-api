@@ -9,10 +9,14 @@ allowedActions:
       sortOrder: name
       relations:
         - children
+        - image
+        - property_groups
   store:
   show:
       relations:
         - children
+        - image
+        - property_groups
   update:
   destroy:
 

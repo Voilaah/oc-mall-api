@@ -19,11 +19,9 @@ Plugins Required:
 - [ ] `GET /api/settings`
 - [ ] `GET /api/shippings`
 - [ ] `GET /api/payments`
-- [ ] `GET /api/properties`
+- [ ] `GET /api/properties/{categorySlug*}`
 - [x] `GET /api/categories`
 - [x] `GET /api/categories/{slug*}` or `GET /api/categories/{id}`
-- [x] `GET /api/categories/{slug*}?with=products`
-- [x] `GET /api/categories/{id}?with=products`
 - [x] `GET /api/categories/{slug*}?gender=female` or `GET /api/categories/{id}?gender=female`
 - [x] `GET /api/brands`
 - [x] `GET /api/brands/{slug*}` or `GET /api/brands/{id}`
@@ -42,7 +40,7 @@ Plugins Required:
 - [x] `GET /api/products?sort=name_desc`
 - [x] `GET /api/products/{id}`
 - [x] `GET /api/products/{categorySlug*}` (Ex: /api/products/bikes or /api/products/bikes/citybikes)
-- [ ] `GET /api/products/{id}/review`
+- [ ] `GET /api/products/{id}/reviews`
 - [x] `GET /api/variants/{id}`
 
 
