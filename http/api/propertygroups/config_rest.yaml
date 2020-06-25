@@ -8,21 +8,19 @@ allowedActions:
       pageSize: 20
       sortOrder: name
       relations:
-        - children
-        - image
+        - filterable_properties
   store:
   show:
       relations:
-        - children
-        - image
+        - filterable_properties
   update:
   destroy:
 
 # Model Class name
-modelClass: OFFLINE\Mall\Models\Category
+modelClass: OFFLINE\Mall\Models\PropertyGroup
 
 # transformer Class name
-transformerClass: Voilaah\MallApi\Classes\Transformers\CategoryTransformer
+transformerClass: Voilaah\MallApi\Classes\Transformers\PropertyGroupTransformer
 
 # Verb Method Prefix
 prefix: api

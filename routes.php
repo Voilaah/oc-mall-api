@@ -26,6 +26,11 @@ Route::group([
     });
 
     // Simple Resources related
+
+    // Route::get('properties/{categoryId}', 'PropertyGroups@show')
+    //     ->where('categoryId', '[0-9]+')
+    //     ->name('properties.show');
+
     Route::get('products/{recordId}', 'Products@show')
         ->where('recordId', '[0-9]+')
         ->name('products.show');
@@ -39,6 +44,9 @@ Route::group([
     // Route::get('categories/{recordId}/products', 'Products@index')
     //     ->where('recordId', '[0-9]+')
     //     ->name('categories.show');
+    // Route::get('categories/{recordId}/properties', 'Categories@showProperties')
+    //     ->where('recordId', '[0-9]+')
+    //     ->name('categories.show');
     Route::get('categories/{recordId}', 'Categories@show')
         ->where('recordId', '.*')
         ->name('categories.show');
@@ -50,7 +58,7 @@ Route::group([
     //     "destroy",
     // ]);
     Route::resource('brands', 'Brands');
-    Route::resource('productscategory', 'ProductsCategory');
+    // Route::resource('productscategory', 'ProductsCategory');
 
     // Cart related
     // Route::get('cart/reset', 'ShoppingCartController@killme');

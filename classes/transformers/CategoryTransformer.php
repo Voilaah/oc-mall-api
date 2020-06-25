@@ -4,14 +4,50 @@ namespace Voilaah\MallApi\Classes\Transformers;
 
 
 use OFFLINE\Mall\Models\Category;
+use OFFLINE\Mall\Models\Property;
 use OFFLINE\Mall\Models\PropertyGroup;
 use League\Fractal\TransformerAbstract;
 use Voilaah\MallApi\Classes\Transformers\ImageTransformer;
 use Voilaah\MallApi\Classes\Transformers\ProductTransformer;
 use Voilaah\MallApi\Classes\Transformers\PropertyGroupTransformer;
+use Voilaah\MallApi\Classes\Transformers\PropertyValueTransformer;
 
 class CategoryTransformer extends TransformerAbstract
 {
+    /**
+     * All available property filters.
+     *
+     * @var Collection
+     */
+    public $propertyGroups;
+        /**
+     * All available property values.
+     *
+     * @var Collection
+     */
+    protected $properties_values;
+
+
+        /**
+     * The active category.
+     *
+     * @var Category
+     */
+    protected $category;
+    /**
+     * A Collection of all subcategories.
+     *
+     * @var Collection
+     */
+    protected $categories;
+
+    /**
+     * A collection of available Property models.
+     *
+     * @var Collection
+     */
+    public $props;
+
     /**
      * @var array
      */
@@ -21,7 +57,8 @@ class CategoryTransformer extends TransformerAbstract
         'children',
         'products',
         'image',
-        'property_groups'
+        'property_groups',
+        'properties_values',
     ];
     /**
      * Turn this model object into a generic array.
@@ -31,6 +68,11 @@ class CategoryTransformer extends TransformerAbstract
      */
     public function transform(Category $model)
     {
+        $this->categories = collect([$model]);
+        if (true /*$this->includeChildren*/) {
+            $this->categories = $model->getAllChildrenAndSelf();
+        }
+
         return [
             'id'            => (int)$model->id,
             'parent_id'     => ($model->parent_id)?:null,
@@ -83,7 +125,7 @@ class CategoryTransformer extends TransformerAbstract
      */
     protected function includePropertyGroups($model)
     {
-        $property_groups = $model
+        $this->propertyGroups = $model
             ->load('property_groups.translations')
             ->inherited_property_groups
             ->load('filterable_properties.translations')
@@ -91,10 +133,41 @@ class CategoryTransformer extends TransformerAbstract
                 return $group->filterable_properties->count() < 1;
             })->sortBy('pivot.sort_order');
 
-            // trace_log($property_groups->toArray());
+        $this->setProps();
 
-        if ($property_groups->count() > 0)
-            return $this->collection($property_groups, new PropertyGroupTransformer());
+        if ($this->propertyGroups->count() > 0)
+            return $this->collection($this->propertyGroups, new PropertyGroupTransformer());
 
+    }
+
+    public function includePropertiesValues($model)
+    {
+
+        return $this->collection($this->values->values(), new PropertyValueTransformer());
+    }
+
+            /**
+     * Pull all the properties from all property groups. These are needed
+     * to generate possible filter values.
+     *
+     * @return void
+     */
+    protected function setProps()
+    {
+        $this->values = Property::getValuesForCategory($this->categories);
+        $valueKeys    = $this->values->keys();
+        $props        = $this->propertyGroups->flatMap->filterable_properties->unique();
+
+        // Remove any property that has no available filters.
+        $this->props = $props->filter(function (Property $property) use ($valueKeys) {
+            return $valueKeys->contains($property->id);
+        });
+
+        $groupKeys = $this->props->pluck('pivot.property_group_id');
+
+        // Remove any property group that has no available properties.
+        $this->propertyGroups = $this->propertyGroups->filter(function (PropertyGroup $group) use ($groupKeys) {
+            return $groupKeys->contains($group->id);
+        });
     }
 }

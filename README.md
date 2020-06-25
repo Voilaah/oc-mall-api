@@ -19,9 +19,9 @@ Plugins Required:
 - [ ] `GET /api/settings`
 - [ ] `GET /api/shippings`
 - [ ] `GET /api/payments`
-- [ ] `GET /api/properties/{categorySlug*}`
 - [x] `GET /api/categories`
 - [x] `GET /api/categories/{slug*}` or `GET /api/categories/{id}`
+- [x] `GET /api/categories/{slug*}?with=property_groups,properties_values` or `GET /api/categories/{id}?with=property_groups,properties_values`
 - [x] `GET /api/categories/{slug*}?gender=female` or `GET /api/categories/{id}?gender=female`
 - [x] `GET /api/brands`
 - [x] `GET /api/brands/{slug*}` or `GET /api/brands/{id}`
