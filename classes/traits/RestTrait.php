@@ -20,9 +20,10 @@ trait RestTrait {
     protected $fractal;
     protected $transformer;
 
-    protected $sort;
+    // protected $sort;
     protected $sortKey;
-    protected $direction;
+    protected $filtersKey;
+    // protected $direction;
 
 
     public function bootRestTrait()
@@ -38,7 +39,7 @@ trait RestTrait {
         $this->fractal->parseIncludes($arRelation);
     }
 
-    protected function respondWithCollection($data, $callback = null, $statusCode = 200)
+    public function respondWithCollection($data, $callback = null, $statusCode = 200)
     {
         if ($data) {
             $resource = new Collection($data->items(), $callback);
@@ -50,7 +51,7 @@ trait RestTrait {
     }
 
 
-    protected function respondWithItem($item, $callback, $statusCode)
+    public function respondWithItem($item, $callback, $statusCode)
     {
         if ($item) {
 
@@ -65,7 +66,7 @@ trait RestTrait {
 
     protected  function respondWithArray(array $array, $statusCode = null, array $headers = [])
     {
-        $array = array_merge(array_merge($this->getInformationApiRequest(), ["status" => "success"], ["sort" => $this->sortKey], ["direction" => $this->direction]), $array);
+        $array = array_merge(array_merge($this->getInformationApiRequest(), ["status" => "success"], ["sort" => $this->sortKey], ["filters" => $this->filtersKey]), $array);
         return Response::json(
                 $array,
                 (isset($statusCode)) ? $statusCode : 500,
@@ -92,6 +93,15 @@ trait RestTrait {
                 "resource" => "undefined"
             ];
         }
+    }
+
+    public function setSortKey($value=null)
+    {
+        $this->sortKey = $value;
+    }
+    public function setFilters($value=null)
+    {
+        $this->filtersKey = $value;
     }
 
 }

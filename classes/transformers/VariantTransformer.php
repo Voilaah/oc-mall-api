@@ -30,8 +30,6 @@ class VariantTransformer extends TransformerAbstract
         'image_sets',
     ];
 
-    protected $productModel;
-
 
     /**
      * Turn this item object into a generic array.
@@ -41,21 +39,26 @@ class VariantTransformer extends TransformerAbstract
      */
     public function transform(Variant $model)
     {
-        $this->productModel = $model;
+        // trace_log(get_class($model));
+        // if ("OFFLINE\Mall\Models\Product" === get_class($model)) {
+        //     trace_log('Product '.$model->id);
+        //     return parent::transform($model);
+        // }
 
-        return [
-            'id' => (int)$model->id,
-            'hash_id' => (string)$model->hash_id,
-            'slug' => (string)$model->hash_id,
-            'name' => (string)$model->name,
-            'published' => (boolean)$model->published,
-            'allow_out_of_stock_purchases' => (boolean)$model->allow_out_of_stock_purchases,
-            'stock' => (int)$model->stock,
-            'weight' => (double)$model->weight,
-            'url' =>  route('products.show', ['recordId' => $model->slug . '/' . $model->hash_id] ),
-            // 'price' => new PriceTransformer($model->price)
-
-        ];
+        return
+            [
+                'id' => (int)$model->id,
+                'hash_id' => (string)$model->hash_id,
+                'slug' => (string)$model->hash_id,
+                'name' => (string)$model->name,
+                'published' => (boolean)$model->published,
+                'allow_out_of_stock_purchases' => (boolean)$model->allow_out_of_stock_purchases,
+                'stock' => (int)$model->stock,
+                'weight' => (double)$model->weight,
+                'url' =>  route('products.show', ['recordId' => $model->slug . '/' . $model->hash_id] ),
+                // 'price' => new PriceTransformer($model->price)
+            ]
+        ;
     }
 
      /**

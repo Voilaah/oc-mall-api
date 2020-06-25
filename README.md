@@ -22,9 +22,22 @@ Plugins Required:
 - [ ] `GET /api/properties`
 - [x] `GET /api/categories`
 - [x] `GET /api/categories/{slug*}` or `GET /api/categories/{id}`
+- [x] `GET /api/categories/{slug*}?gender=female` or `GET /api/categories/{id}?gender=female`
 - [x] `GET /api/brands`
 - [x] `GET /api/brands/{slug*}` or `GET /api/brands/{id}`
 - [x] `GET /api/products`
+- [x] `GET /api/products?sort=latest` >> default
+- [x] `GET /api/products?on_sale=true`
+- [x] `GET /api/products?brand=cruiser-bikes`
+- [x] `GET /api/products?brand=cruiser-bikes&on_sale=true&sort=latest`
+- [x] `GET /api/products?sort=oldest`
+- [x] `GET /api/products?sort=bestseller`
+- [x] `GET /api/products?sort=ratings`
+- [x] `GET /api/products?sort=price`
+- [x] `GET /api/products?sort=price_high`
+- [x] `GET /api/products?sort=price_low`
+- [x] `GET /api/products?sort=name_asc`
+- [x] `GET /api/products?sort=name_desc`
 - [x] `GET /api/products/{slug*}` or `GET /api/products/{id}`
 - [ ] `POST /api/products/{slug*}/review` or `GET /api/products/{id}/review`
 

@@ -36,6 +36,7 @@ class RestController extends ControllerBehavior
     const API_VERSION = 'v1';
 
 
+
     /**
      * @var Model The child controller that implements the behavior.
      */

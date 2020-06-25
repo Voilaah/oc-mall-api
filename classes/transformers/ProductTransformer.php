@@ -97,7 +97,8 @@ class ProductTransformer extends TransformerAbstract
      */
     public function includeVariants($model)
     {
-        return $this->collection($model->variants, new VariantTransformer);
+        if ($model->variants->count() > 0)
+            return $this->collection($model->variants, new VariantTransformer);
     }
 
     /**
