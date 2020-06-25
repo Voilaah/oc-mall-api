@@ -5,6 +5,7 @@ namespace Voilaah\MallApi\Classes\Transformers;
 use OFFLINE\Mall\Models\Product;
 use League\Fractal\TransformerAbstract;
 use Voilaah\MallApi\Classes\Transformers\BrandTransformer;
+use Voilaah\MallApi\Classes\Transformers\ImageTransformer;
 use Voilaah\MallApi\Classes\Transformers\ServiceTransformer;
 use Voilaah\MallApi\Classes\Transformers\CategoryTransformer;
 use Voilaah\MallApi\Classes\Transformers\ImageSetTransformer;
@@ -15,7 +16,7 @@ class ProductTransformer extends TransformerAbstract
    /**
      * @var array
      */
-    protected $defaultIncludes = ['image_sets', 'categories', 'variants'];
+    protected $defaultIncludes = ['image', 'image_sets', 'categories', 'variants'];
 
     public $availableIncludes = [
         'services',
@@ -80,7 +81,7 @@ class ProductTransformer extends TransformerAbstract
         return $this->collection($model->categories, new CategoryTransformer());
     }
 
-        /**
+    /**
      * Embed Images
      *
      * @return League\Fractal\Resource\Item
@@ -132,6 +133,17 @@ class ProductTransformer extends TransformerAbstract
     {
         if ($model->brand)
             return $this->item($model->brand, new BrandTransformer);
+    }
+
+          /**
+     * Embed Image
+     *
+     * @return League\Fractal\Resource\Item
+     */
+    public function includeImage($model)
+    {
+        if ($model->image)
+            return $this->item($model->image, new ImageTransformer);
     }
 
 }

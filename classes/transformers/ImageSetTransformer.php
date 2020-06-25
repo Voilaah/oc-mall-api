@@ -23,7 +23,6 @@ class ImageSetTransformer extends TransformerAbstract
        return [
             'name' => (string)$model->name,
             'is_main_set' => (boolean)$model->is_main_set,
-
         ];
     }
 

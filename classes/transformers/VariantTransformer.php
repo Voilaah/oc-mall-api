@@ -5,6 +5,7 @@ namespace Voilaah\MallApi\Classes\Transformers;
 use OFFLINE\Mall\Models\Product;
 use OFFLINE\Mall\Models\Variant;
 use League\Fractal\TransformerAbstract;
+use Voilaah\MallApi\Classes\Transformers\ImageTransformer;
 use Voilaah\MallApi\Classes\Transformers\PriceTransformer;
 use Voilaah\MallApi\Classes\Transformers\CategoryTransformer;
 use Voilaah\MallApi\Classes\Transformers\ImageSetTransformer;
@@ -15,7 +16,7 @@ class VariantTransformer extends TransformerAbstract
    /**
      * @var array
      */
-    protected $defaultIncludes = [ 'price'];
+    protected $defaultIncludes = [ 'categories', 'price', 'image'];
 
     public $availableIncludes = [
         'price',
@@ -82,7 +83,7 @@ class VariantTransformer extends TransformerAbstract
         return $this->collection($model->prices, new ProductPriceTransformer());
     }
 
-        /**
+    /**
      * Embed Images
      *
      * @return League\Fractal\Resource\Item
@@ -92,6 +93,38 @@ class VariantTransformer extends TransformerAbstract
         return $this->collection($model->temp_images, new ImageSetTransformer);
     }
 
+
+     /**
+     * Embed Category
+     *
+     * @return League\Fractal\Resource\Item
+     */
+    public function includeCategories($model)
+    {
+        if ($model->categories->count() > 0)
+            return $this->collection($model->categories, new CategoryTransformer());
+    }
+
+        /**
+     * Embed Images
+     *
+     * @return League\Fractal\Resource\Item
+     */
+    public function includeImageSets($model)
+    {
+        if ($model->image_sets->count() > 0)
+            return $this->collection($model->image_sets, new ImageSetTransformer);
+    }
+      /**
+     * Embed Image
+     *
+     * @return League\Fractal\Resource\Item
+     */
+    public function includeImage($model)
+    {
+        if ($model->image)
+            return $this->item($model->image, new ImageTransformer);
+    }
 
 
 }

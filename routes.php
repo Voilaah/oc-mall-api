@@ -33,6 +33,7 @@ Route::group([
         ->where('categorySlug', '.*')
         ->name('products.index');
     Route::resource('products', 'Products');
+    Route::resource('variants', 'Variants');
 
     Route::get('categories/{recordId}', 'Categories@show')
         ->where('recordId', '.*')

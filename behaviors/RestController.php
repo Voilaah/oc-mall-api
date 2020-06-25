@@ -285,9 +285,11 @@ class RestController extends ControllerBehavior
             $query = $model->newQuery();
                     // deprecated
             // $result = $query->find($recordId);
-            $result = $query->where('id', $recordId)
-                            ->orWhere('slug', $recordId)
-                            ->first();
+            $query = $query->where('id', $recordId);
+            if (property_exists($model, 'slug'))
+                $query->orWhere('slug', $recordId);
+
+            $result = $query->first();
         }
 
         if (!$result) {
