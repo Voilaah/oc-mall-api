@@ -27,8 +27,11 @@ Route::group([
 
     // Simple Resources related
     Route::get('products/{recordId}', 'Products@show')
-        ->where('recordId', '.*')
+        ->where('recordId', '[0-9]+')
         ->name('products.show');
+    Route::get('products/{categorySlug}', 'Products@index')
+        ->where('categorySlug', '.*')
+        ->name('products.index');
     Route::resource('products', 'Products');
 
     Route::get('categories/{recordId}', 'Categories@show')

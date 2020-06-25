@@ -4,6 +4,7 @@ use Request;
 use Backend\Classes\Controller;
 use OFFLINE\Mall\Models\Product;
 use OFFLINE\Mall\Models\Variant;
+use OFFLINE\Mall\Models\Category;
 use Illuminate\Support\Collection;
 use OFFLINE\Mall\Classes\Index\Index;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -20,6 +21,10 @@ use OFFLINE\Mall\Classes\CategoryFilter\SortOrder\SortOrder as MallSortOrder;
  */
 class Products extends Controller implements ResourceInterface
 {
+
+    protected $categorySlug;
+    protected $category;
+    protected $categories;
 
     protected $includeVariants;
 
@@ -52,8 +57,11 @@ class Products extends Controller implements ResourceInterface
      *
      * @return [type] [description]
      */
-    public function index()
+    public function index($categorySlug = null)
     {
+
+        $this->categorySlug = $categorySlug;
+
         $options        = $this->getConfig()->allowedActions['index'];
         $page           = Request::input('page', 1);
 
@@ -68,8 +76,19 @@ class Products extends Controller implements ResourceInterface
         $this->perPage = $pageSize;
         $this->pageNumber = $page;
 
-        $filters   = $this->getFilters();
-        $sortOrder = $this->getSortOrder();
+        $this->category     = $this->getCategory();
+
+        if ($this->category) {
+            $categories = collect([$this->category]);
+            if (true /*$this->includeChildren*/) {
+                $categories = $this->category->getAllChildrenAndSelf();
+            }
+
+            $this->categories = $categories;
+        }
+
+        $filters            = $this->getFilters();
+        $sortOrder          = $this->getSortOrder();
 
         $model    = $this->includeVariants() ? new Variant() : new Product();
         $useIndex = $this->includeVariants() ? 'variants' : 'products';
@@ -113,6 +132,32 @@ class Products extends Controller implements ResourceInterface
     }
 
 
+
+    /**
+     * Retrieve the Category by ID or from the page's :slug parameter.
+     *
+     * @return CategoryModel|null
+     */
+    protected function getCategory()
+    {
+        if ($this->category) {
+            return $this->category;
+        }
+
+        if ($this->categorySlug === null) {
+            return null;
+        }
+
+        // if ($this->property('category') === ':slug' && $this->param('slug') === null) {
+        //     throw new \LogicException(
+        //         'Voilaah.MallApi: A :slug URL parameter is needed when selecting products by category slug.'
+        //     );
+        // }
+
+        return Category::bySlugOrId($this->categorySlug, ":slug");
+    }
+
+
     /**
      * Paginate the result set.
      *
@@ -143,6 +188,10 @@ class Products extends Controller implements ResourceInterface
     }
 
 
+    /**
+     * @deprecated
+     * @return [type] [description]
+     */
     public function includeVariants()
     {
         if ($this->includeVariants)

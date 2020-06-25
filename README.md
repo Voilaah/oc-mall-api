@@ -38,8 +38,9 @@ Plugins Required:
 - [x] `GET /api/products?sort=price_low`
 - [x] `GET /api/products?sort=name_asc`
 - [x] `GET /api/products?sort=name_desc`
-- [x] `GET /api/products/{slug*}` or `GET /api/products/{id}`
-- [ ] `POST /api/products/{slug*}/review` or `GET /api/products/{id}/review`
+- [x] `GET /api/products/{id}`
+- [x] `GET /api/products/{categorySlug*}` (Ex: /api/products/bikes or /api/products/bikes/citybikes)
+- [ ] `GET /api/products/{id}/review`
 
 
 ### Customers
