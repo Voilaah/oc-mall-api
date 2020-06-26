@@ -14,9 +14,7 @@ Plugins Required:
 <a name="overview"></a>
 # API Overview
 
-### Shop
-
-**Note**:
+### Notes
 
 `{slug*}` means a string following the pattern `{slug}` or `{slug1}/{slug2}`
 
@@ -27,6 +25,8 @@ Plugins Required:
 `{id}` means a numeric value
 
 ---
+
+### Shop
 
 - [ ] `GET /api/mall/settings`
 
