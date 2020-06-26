@@ -28,22 +28,28 @@ Plugins Required:
 
 ### Shop
 
+**Settings**
 - [ ] `GET /api/mall/settings`
 
+**Shippings**
 - [ ] `GET /api/mall/shippings`
 - [ ] `GET /api/mall/shippings/{slug*}` or `GET /api/mall/shippings/{id}`
 
+**Payments**
 - [ ] `GET /api/mall/payments`
 - [ ] `GET /api/mall/payments/{slug*}` or `GET /api/mall/payments/{id}`
 
+**Brands**
 - [x] `GET /api/mall/brands`
 - [x] `GET /api/mall/brands/{slug*}` or `GET /api/mall/brands/{id}`
 
+**Categories**
 - [x] `GET /api/mall/categories`
 - [x] `GET /api/mall/categories/{slug*}` OR `GET /api/mall/categories/{id}`
 - [x] `GET /api/mall/categories/{slug*}/filters` OR `GET /api/mall/categories/{id}/filters`
 - [x] `GET /api/mall/categories/{slug*}/products` OR `GET /api/mall/categories/{id}/products`
 
+**Products**
 - [x] `GET /api/mall/products`
 
 **Products sorting options**
@@ -57,18 +63,22 @@ Plugins Required:
 - [x] `GET /api/mall/products?sort=name_asc`
 - [x] `GET /api/mall/products?sort=name_desc`
 
-**Universal filters available for all products:**
+**Universal filters available for all products**
 - [x] `GET /api/mall/products?on_sale=true`
 - [x] `GET /api/mall/products?brand={brandSlug}` (Ex: /api/mall/products?brand=cruiser-bikes)
 - [x] `GET /api/mall/products?brand={brandSlug}&on_sale=true` (Ex: /api/mall/products?brand=cruiser-bikes&on_sale=true)
 - [x] `GET /api/mall/products?price=700.00-1000.00`
 
+**Products by category**
 - [x] `GET /api/mall/products/category/{categorySlug*}` (Ex: /api/mall/products/category/bikes or /api/mall/products/category/bikes/citybikes)
 - [x] `GET /api/mall/products/category/{categorySlug*}?sort=name_desc`
 - [x] `GET /api/mall/products/category/{categorySlug*}?gender=female` (Ex: /api/mall/products/category/bikes?gender=female)
+
+**Products details**
 - [x] `GET /api/mall/products/{slug*}` OR `GET /api/mall/products/{id}`
 - [ ] `GET /api/mall/products/{slug*}/reviews` OR  `GET /api/mall/products/{id}/reviews`
 
+**Variants details**
 - [x] `GET /api/mall/variants/{id}`
 
 
