@@ -16,7 +16,7 @@ Plugins Required:
 
 ### Shop
 
-**Note**: `{slug*}` means either `:slug` or `slug1/slug2`
+**Note**: `{slug*}` means either `{slug}` or `{slug1}/{slug2}`
 
 - [ ] `GET /api/mall/settings`
 
