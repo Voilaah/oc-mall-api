@@ -16,27 +16,28 @@ Plugins Required:
 
 ### Shop
 
+**Note**: `{slug*}` means either `:slug` or `slug1/slug2`
+
 - [ ] `GET /api/mall/settings`
 
 - [ ] `GET /api/mall/shippings`
+- [ ] `GET /api/mall/shippings/{slug*}` or `GET /api/mall/shippings/{id}`
 
 - [ ] `GET /api/mall/payments`
+- [ ] `GET /api/mall/payments/{slug*}` or `GET /api/mall/payments/{id}`
 
 - [x] `GET /api/mall/brands`
 - [x] `GET /api/mall/brands/{slug*}` or `GET /api/mall/brands/{id}`
 
 - [x] `GET /api/mall/categories`
-- [x] `GET /api/mall/categories/{slug*}`
-- [x] `GET /api/mall/categories/{id}`
+- [x] `GET /api/mall/categories/{slug*}` OR `GET /api/mall/categories/{id}`
 - [x] `GET /api/mall/categories/{slug*}/filters` OR `GET /api/mall/categories/{id}/filters`
 - [x] `GET /api/mall/categories/{slug*}/products` OR `GET /api/mall/categories/{id}/products`
 
-- [x] `GET /api/mall/categories/{slug*}?gender=female` or `GET /api/mall/categories/{id}?gender=female`
 - [x] `GET /api/mall/products`
-- [x] `GET /api/mall/products?sort=latest` >> default
-- [x] `GET /api/mall/products?on_sale=true`
-- [x] `GET /api/mall/products?brand=cruiser-bikes`
-- [x] `GET /api/mall/products?brand=cruiser-bikes&on_sale=true&sort=latest`
+
+**Products sorting options**
+- [x] `GET /api/mall/products?sort=latest`
 - [x] `GET /api/mall/products?sort=oldest`
 - [x] `GET /api/mall/products?sort=bestseller`
 - [x] `GET /api/mall/products?sort=ratings`
@@ -45,9 +46,16 @@ Plugins Required:
 - [x] `GET /api/mall/products?sort=price_low`
 - [x] `GET /api/mall/products?sort=name_asc`
 - [x] `GET /api/mall/products?sort=name_desc`
+
+**Universal filters available for all products:**
+- [x] `GET /api/mall/products?on_sale=true`
+- [x] `GET /api/mall/products?brand=cruiser-bikes`
+- [x] `GET /api/mall/products?brand=cruiser-bikes&on_sale=true`
+- [x] `GET /api/mall/products?price=700.00-1000.00`
+
 - [x] `GET /api/mall/products/category/{categorySlug*}` (Ex: /api/mall/products/category/bikes or /api/mall/products/category/bikes/citybikes)
 - [x] `GET /api/mall/products/category/{categorySlug*}?sort=name_desc`
-- [x] `GET /api/mall/products/category/{categorySlug*}?sort=name_desc&gender=female` (Ex: /api/mall/products/category/bikes?sort=name_desc&gender=female)
+- [x] `GET /api/mall/products/category/{categorySlug*}?gender=female` (Ex: /api/mall/products/category/bikes?gender=female)
 - [x] `GET /api/mall/products/{slug*}` OR `GET /api/mall/products/{id}`
 - [ ] `GET /api/mall/products/{slug*}/reviews` OR  `GET /api/mall/products/{id}/reviews`
 
