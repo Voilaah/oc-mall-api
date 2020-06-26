@@ -17,7 +17,13 @@ Plugins Required:
 ### Shop
 
 **Note**:
+
 `{slug*}` means a string following the pattern `{slug}` or `{slug1}/{slug2}`
+
+`{categorySlug*}` means a string following the pattern `{categorySlug}` or `{categorySlug1}/{categorySlug2}`
+
+`{brandSlug}` means a simple string
+
 `{id}` means a numeric value
 
 - [ ] `GET /api/mall/settings`
@@ -51,8 +57,8 @@ Plugins Required:
 
 **Universal filters available for all products:**
 - [x] `GET /api/mall/products?on_sale=true`
-- [x] `GET /api/mall/products?brand=cruiser-bikes`
-- [x] `GET /api/mall/products?brand=cruiser-bikes&on_sale=true`
+- [x] `GET /api/mall/products?brand={brandSlug}` (Ex: /api/mall/products?brand=cruiser-bikes)
+- [x] `GET /api/mall/products?brand={brandSlug}&on_sale=true` (Ex: /api/mall/products?brand=cruiser-bikes&on_sale=true)
 - [x] `GET /api/mall/products?price=700.00-1000.00`
 
 - [x] `GET /api/mall/products/category/{categorySlug*}` (Ex: /api/mall/products/category/bikes or /api/mall/products/category/bikes/citybikes)
@@ -65,7 +71,7 @@ Plugins Required:
 
 
 
-### Customers
+### Authentication and customers profiles
 
 - [x] `POST /api/mall/auth/register`
 - [x] `POST /api/mall/auth/account-activation`
