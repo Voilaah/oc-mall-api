@@ -26,6 +26,8 @@ Plugins Required:
 
 `{id}` means a numeric value
 
+---
+
 - [ ] `GET /api/mall/settings`
 
 - [ ] `GET /api/mall/shippings`
