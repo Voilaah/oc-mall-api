@@ -1,5 +1,6 @@
 # RESTFUL API for October CMS OFFLINE MALL plugin
 
+**Work in progress**
 
 Plugins Required:
 - RainLab.User
@@ -43,6 +44,9 @@ Plugins Required:
 - [x] `GET /api/mall/brands`
 - [x] `GET /api/mall/brands/{slug*}` or `GET /api/mall/brands/{id}`
 
+**Discounts**
+- [ ] `GET /api/mall/discounts`
+
 **Categories**
 - [x] `GET /api/mall/categories`
 - [x] `GET /api/mall/categories/{slug*}` OR `GET /api/mall/categories/{id}`
@@ -76,10 +80,9 @@ Plugins Required:
 
 **Products details**
 - [x] `GET /api/mall/products/{slug*}` OR `GET /api/mall/products/{id}`
-- [ ] `GET /api/mall/products/{slug*}/reviews` OR  `GET /api/mall/products/{id}/reviews`
 
 **Variants details**
-- [x] `GET /api/mall/variants/{id}`
+- [x] `GET /api/mall/variants/{slug*}` OR `GET /api/mall/variants/{id}`
 
 
 

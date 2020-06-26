@@ -80,8 +80,8 @@ class CategoryTransformer extends TransformerAbstract
             'name'          => (string)$model->name,
             'slug'          => (string)$model->nestedslug,
             'description'   => (string)$model->description,
-            'url'           => route('categories.show', ['recordId' => $model->id]),
-            'url_slug'      => route('categories.show', ['recordId' => $model->nestedslug]),
+            // 'url'           => route('categories.show', ['recordId' => $model->id]),
+            'url'      => route('categories.show', ['recordId' => $model->nestedslug]),
             'created_at'    => $model->created_at->timestamp,
             'updated_at'    => $model->updated_at->timestamp,
         ];

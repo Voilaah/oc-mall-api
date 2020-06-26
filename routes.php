@@ -41,10 +41,12 @@ Route::group([
 
     });
 
+    Route::pattern('slug', '[A-Za-z]+');
+    Route::pattern('variant', '[A-Za-z]+');
     Route::pattern('categorySlug', '.*');
     Route::pattern('recordId', '.*');
 
-    // Simple Resources related
+    // General Resources related
     Route::get('settings', 'Settings@show')->name('settings.show');
     Route::resource('brands', 'Brands')
         ->only([
@@ -73,49 +75,67 @@ Route::group([
             'index' => 'shippings.index',
             'show' => 'shippings.show'
         ]);
+    Route::resource('discounts', 'Discounts')
+        ->only([
+            'index',
+            'show'
+        ])
+        ->names([
+            'index' => 'discounts.index',
+            'show' => 'discounts.show'
+        ]);
 
     /**
      * Products
      */
 
-    // Route::get('products/{id}', 'Products@show')
-    //     ->parameters([
-    //         'id' => 'recordId'
-    //     ])
-    //     ->where('recordId', '[0-9]+')
-    //     ->name('products.show');
-
     Route::get('products/category/{categorySlug}', 'Products@index')
         ->name('products.bycategory');
 
-    Route::resource('products', 'Products')
-        ->parameters([
-            'products' => 'recordId'
-        ])
-        ->only([
-            "index",
-            "show",
-        ])
-        ->names([
-            'index' => 'products.index',
-            'show' => 'products.show'
+    // Route::get('products/{slug}/{variant}', [
+    //         'as'    => 'variants.show',
+    //         'uses'  =>'Products@showVariant'
+    //     ]);
+
+    Route::get('products/{recordId}', [
+            'as'    => 'products.show',
+            'uses'  =>'Products@show'
         ]);
+
+    Route::get('products', [
+            'as'    => 'products.index',
+            'uses'  => 'Products@index'
+        ])
+        ->name('products.index');
+
+    // Route::resource('products', 'Products')
+    //     ->parameters([
+    //         'products' => 'recordId'
+    //     ])
+    //     ->only([
+    //         "index",
+    //         "show",
+    //     ])
+    //     ->names([
+    //         'index' => 'products.index',
+    //         'show' => 'products.show'
+    //     ]);
 
     /**
      * Variants
      */
-    Route::resource('variants', 'Variants')
-        ->parameters([
-            'variants' => 'recordId'
-        ])
-        ->only([
-            "index",
-            "show",
-        ])
-        ->names([
-            'index' => 'variants.index',
-            'show' => 'variants.show'
-        ]);
+    // Route::resource('variants', 'Variants')
+    //     ->parameters([
+    //         'variants' => 'recordId'
+    //     ])
+    //     ->only([
+    //         "index",
+    //         "show",
+    //     ])
+    //     ->names([
+    //         'index' => 'variants.index',
+    //         'show' => 'variants.show'
+    //     ]);
 
 
     /**
@@ -146,13 +166,6 @@ Route::group([
     /**
      * Cart related
      */
-
-    Route::resource('cart', 'ShoppingCartController')->only([
-        "index",
-        "store",
-        "update",
-        "show",
-        "destroy",
-    ]);
+    Route::apiResource('cart', 'ShoppingCartController');
 
 });

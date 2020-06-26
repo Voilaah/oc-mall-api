@@ -89,12 +89,14 @@ trait RestTrait {
             $resource = $this->getController()->getResourceName();
             return [
                 "version" => strtolower(self::API_VERSION),
-                "resource" => strtolower($resource)
+                "resource" => strtolower($resource),
+                "path"      => request()->path()
             ];
         } catch (\Throwable $e) {
             return [
                 "version" => strtolower(self::API_VERSION),
-                "resource" => "undefined"
+                "resource" => "undefined",
+                "path"      => request()->path()
             ];
         }
     }

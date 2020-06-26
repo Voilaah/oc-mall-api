@@ -57,6 +57,7 @@ class VariantTransformer extends TransformerAbstract
                 'stock' => (int)$model->stock,
                 'weight' => (double)$model->weight,
                 'url' =>  route('products.show', ['recordId' => $model->slug . '/' . $model->hash_id] ),
+                // 'url' =>  route('variants.show', ['slug' => $model->product->slug, 'variant' => $model->hash_id] ),
                 // 'price' => new PriceTransformer($model->price)
             ]
         ;

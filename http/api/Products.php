@@ -21,12 +21,19 @@ use OFFLINE\Mall\Classes\CategoryFilter\SortOrder\SortOrder as MallSortOrder;
  */
 class Products extends Controller implements ResourceInterface
 {
+    use \OFFLINE\Mall\Classes\Traits\HashIds;
 
     protected $categorySlug;
     protected $category;
     protected $categories;
 
     protected $includeVariants;
+
+    protected $isVariant;
+    protected $variantId;
+    protected $variant;
+    protected $productId;
+    protected $product;
 
     public $filter;
 
@@ -290,12 +297,108 @@ class Products extends Controller implements ResourceInterface
 
 
 
+
+    /**
+     * Finds a Model record by its primary identifier, used by show, update actions.
+     * This logic can be changed by overriding it in the rest controller.
+     * @param string $recordId
+     * @return Model
+     */
+    public function findModelObject($recordId)
+    {
+        if (!strlen($recordId)) {
+            throw new Exception('Record ID/slug has not been specified.');
+        }
+
+        $this->variantId = null;
+        $recordId = trim($recordId, ' /');
+        $array = explode('/', $recordId);
+
+        $this->isVariant = (count($array) == 2);
+
+        $this->productId = $this->isVariant ? reset($array) : $recordId;
+        $this->product = $this->getProduct();
+
+        if ($this->isVariant) {
+            // $productId = reset($array);
+            $variant = end($array);
+            $this->variantId = $this->decode($variant);
+            $this->getVariant();
+            if (!$this->variant) {
+                throw new Exception(sprintf('Variant Record with an ID/slug of %u could not be found.', $this->variantId));
+            }
+            return $this->variant;
+        } else {
+            if (!$this->product) {
+                throw new Exception(sprintf('Product Record with an ID/slug of %u could not be found.', $this->productId));
+            }
+            return $this->product;
+        }
+
+    }
+
+    protected function getProduct($with = null)
+    {
+        if ($this->product) {
+            return $this->product;
+        }
+
+        if ($with === null) {
+            $with = [
+                'variants',
+                'variants.property_values.translations',
+                'variants.image_sets',
+                'image_sets',
+                'downloads',
+                'categories',
+                'property_values.property.property_groups',
+                'services.options',
+                'taxes',
+            ];
+        }
+
+        $model = new Product;
+
+        // $product = $this->property('product');
+        $query   = Product::published()->with($with);
+
+        // if ($product === ':slug') {
+            // $method = $this->rainlabTranslateInstalled() ? 'transWhere' : 'where';
+            $query = $query->where('id', $this->productId);
+            if (property_exists($model, 'slug') || in_array('slug', $model->fillable)) {
+                $query->orWhere('slug', $this->productId);
+            }
+            return $query->first();
+            // return $model->where('slug', $this->param('slug'))->firstOrFail();
+        // }
+
+        // return $model->findOrFail($product);
+
+    }
+
+    protected function getVariant($value='')
+    {
+        $variantModel = Variant::published()->with([
+            'property_values.translations',
+            'property_values.property.property_groups',
+            'product_property_values.property.property_groups',
+            'image_sets',
+        ]);
+        return $this->variant = $variantModel->where('product_id', $this->product->id)->findOrFail($this->variantId);
+
+    }
+
+    public function createTransformerObject()
+    {
+        return $this->isVariant ? new VariantTransformer : new ProductTransformer;
+    }
+
     /**
      * Return the resource name used by the controller
      * @return mixed
      */
     public function getResourceName() {
-        return 'products';
+        return $this->isVariant ? 'variants' : 'products';
     }
 
 }

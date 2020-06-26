@@ -8,6 +8,7 @@ use Lang;
 use Request;
 use Exception;
 use ValidationException;
+use Illuminate\Routing\Route;
 use Backend\Classes\ControllerBehavior;
 use October\Rain\Database\ModelException;
 use Dingo\Api\Transformer\Adapter\Fractal;
@@ -184,8 +185,10 @@ class RestController extends ControllerBehavior
      * @param  int  $recordId
      * @return Response
      */
-    public function show($recordId)
+    public function show($recordId = null)
     {
+// trace_log(request()->path());
+// trace_log(request()->route()->getName());
         $relations =  isset($this->config->allowedActions['show']['relations']) ? $this->config->allowedActions['show']['relations'] : [];
         $includes = Request::input('with', null);
         // merging
