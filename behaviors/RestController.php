@@ -284,11 +284,12 @@ class RestController extends ControllerBehavior
             $result = ($this->config->modelClass)::bySlugOrId($recordId, $id);
         } else {
             $query = $model->newQuery();
-                    // deprecated
+            // deprecated
             // $result = $query->find($recordId);
             $query = $query->where('id', $recordId);
-            if (property_exists($model, 'slug'))
+            if (property_exists($model, 'slug') || in_array('slug', $model->fillable)) {
                 $query->orWhere('slug', $recordId);
+            }
 
             $result = $query->first();
         }

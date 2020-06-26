@@ -35,7 +35,7 @@ trait RestTrait {
      * Function to include relation data for showing purpose
      * @param $arRelation
      */
-    protected function parseIncludes($arRelation) {
+    public function parseIncludes($arRelation) {
         $this->fractal->parseIncludes($arRelation);
     }
 
@@ -66,7 +66,11 @@ trait RestTrait {
 
     protected  function respondWithArray(array $array, $statusCode = null, array $headers = [])
     {
-        $array = array_merge(array_merge($this->getInformationApiRequest(), ["status" => "success"], ["sort" => $this->sortKey], ["filters" => $this->filtersKey]), $array);
+        $array = array_merge(array_merge($this->getInformationApiRequest(), ["status" => "success"]), $array);
+        if ($this->sortKey)
+            $array = array_merge( $array, ["sort" => $this->sortKey] );
+        if ($this->filtersKey)
+            $array = array_merge( $array, ["applied_filters" => $this->filtersKey] );
         return Response::json(
                 $array,
                 (isset($statusCode)) ? $statusCode : 500,

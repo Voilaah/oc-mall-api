@@ -9,6 +9,7 @@ use OFFLINE\Mall\Models\PropertyGroup;
 use League\Fractal\TransformerAbstract;
 use Voilaah\MallApi\Classes\Transformers\ImageTransformer;
 use Voilaah\MallApi\Classes\Transformers\ProductTransformer;
+use Voilaah\MallApi\Classes\Transformers\VariantTransformer;
 use Voilaah\MallApi\Classes\Transformers\PropertyGroupTransformer;
 use Voilaah\MallApi\Classes\Transformers\PropertyValueTransformer;
 
@@ -79,7 +80,8 @@ class CategoryTransformer extends TransformerAbstract
             'name'          => (string)$model->name,
             'slug'          => (string)$model->nestedslug,
             'description'   => (string)$model->description,
-            'url'           => route('categories.show', ['recordId' => $model->nestedslug]),
+            'url'           => route('categories.show', ['recordId' => $model->id]),
+            'url_slug'      => route('categories.show', ['recordId' => $model->nestedslug]),
             'created_at'    => $model->created_at->timestamp,
             'updated_at'    => $model->updated_at->timestamp,
         ];
@@ -106,7 +108,6 @@ class CategoryTransformer extends TransformerAbstract
         if ($model->products->count() > 0 )
             return $this->collection($model->products, new ProductTransformer());
     }
-
           /**
      * Embed Image
      *

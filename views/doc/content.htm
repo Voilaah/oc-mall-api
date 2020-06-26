@@ -29,7 +29,7 @@ A simple HTTP RESTfulAPI for an e-shop project using OFFLINE Mall plugin with JW
 # General Notes
 
 - all the dates are expressed in UNIX timestamp format
-- you can ping the api here `/api/ping`
+- you can ping the api here `/api/mall/ping`
 - list of resources like products, categories and brands display a paginator helper inside the tag 'meta'
 
 Ex:
@@ -64,22 +64,22 @@ Ex:
 
 # Shippings
 
-`GET /api/shippings`
+`GET /api/mall/shippings`
 
 
 <a name="customers"></a>
 # Customers
 
-`GET /api/auth/me/customer`
+`GET /api/mall/auth/me/customer`
 
-`GET /api/auth/me/addresses`
+`GET /api/mall/auth/me/addresses`
 
-`GET /api/auth/me/orders`
+`GET /api/mall/auth/me/orders`
 
 <a name="categories"></a>
 # Categories
 
-`GET /api/categories`
+`GET /api/mall/categories`
 
 Return a list of categories sorted and paginated.
 
@@ -87,13 +87,13 @@ Return a list of categories sorted and paginated.
 
 default sorting is by category name
 
-`GET /api/products?sort=name?direction=asc`
+`GET /api/mall/products?sort=name?direction=asc`
 
 ### Examples
 
-`GET /api/products?sort=name&direction=desc`
+`GET /api/mall/products?sort=name&direction=desc`
 
-`GET /api/products?sort=latest`
+`GET /api/mall/products?sort=latest`
 
 
 ### Sort Options
@@ -120,17 +120,17 @@ Return a list of products sorted and paginated with the relations `variants`, `c
 
 default sorting is by latest products
 
-`GET /api/products?sort=latest`
+`GET /api/mall/products?sort=latest`
 
 ### Examples
 
-`GET /api/products?sort=name&direction=asc`
+`GET /api/mall/products?sort=name&direction=asc`
 
-`GET /api/products?sort=bestseller&direction=desc`
+`GET /api/mall/products?sort=bestseller&direction=desc`
 
-`GET /api/products?sort=price_low`
+`GET /api/mall/products?sort=price_low`
 
-`GET /api/products?sort=price_high`
+`GET /api/mall/products?sort=price_high`
 
 
 
@@ -169,39 +169,39 @@ Return the detail of a product with the relations `variants`, `categories`, `bra
 # Standard flow
 
 #### List all categories
-`GET /api/categories`
-`GET /api/categories?sort=name&direction=asc` => default
-`GET /api/categories?sort=name&direction=desc`
+`GET /api/mall/categories`
+`GET /api/mall/categories?sort=name&direction=asc` => default
+`GET /api/mall/categories?sort=name&direction=desc`
 
 #### List all products in one category
-`GET /api/categories/coffee`
+`GET /api/mall/categories/coffee`
 
 #### Detail of a product
-`GET /api/products/coffee`
+`GET /api/mall/products/coffee`
 
 #### Detail of a product variant
-`GET /api/products/coffee/latte`
+`GET /api/mall/products/coffee/latte`
 
 #### Add a single item into the cart
-`POST /api/cart`
+`POST /api/mall/cart`
 
 #### Update an existing cart item
-`PUT /api/cart/{cartItemId}`
+`PUT /api/mall/cart/{cartItemId}`
 
 #### Delete an existing cart item
-`DELETE /api/cart/{cartItemId}`
+`DELETE /api/mall/cart/{cartItemId}`
 
 #### Reset the whole cart
-`DELETE /api/cart`
+`DELETE /api/mall/cart`
 
 #### Checkout
-`POST /api/cart/checkout`
+`POST /api/mall/cart/checkout`
 
 #### List all shippings
-`GET /api/shippings`
+`GET /api/mall/shippings`
 
 #### List all discounts
-`GET /api/discounts`
+`GET /api/mall/discounts`
 
 
 <a name="authentication"></a>
@@ -212,7 +212,7 @@ Here's the list of available endpoints for this plugin.
 
 ## Login
 
-`POST /api/auth/login`
+`POST /api/mall/auth/login`
 
 ### Parameters
 
@@ -248,7 +248,7 @@ Here's the list of available endpoints for this plugin.
 
 ## Register
 
-`POST /api/auth/register`
+`POST /api/mall/auth/register`
 
 
 ### Parameters
@@ -290,7 +290,7 @@ Here's the list of available endpoints for this plugin.
 
 ## Account Activation
 
-`POST /api/auth/account-activation`
+`POST /api/mall/auth/account-activation`
 
 
 ### Parameters
@@ -321,7 +321,7 @@ Here's the list of available endpoints for this plugin.
 
 ## Forgot Password
 
-`POST /api/auth/forgot-password`
+`POST /api/mall/auth/forgot-password`
 
 
 ### Parameters
@@ -352,7 +352,7 @@ Here's the list of available endpoints for this plugin.
 
 ## Reset Password
 
-`POST /api/auth/reset-password`
+`POST /api/mall/auth/reset-password`
 
 **Route name**
 
@@ -388,7 +388,7 @@ Here's the list of available endpoints for this plugin.
 
 ## Refresh Token
 
-`POST /api/auth/refresh-token`
+`POST /api/mall/auth/refresh-token`
 
 
 ### Parameters
@@ -421,7 +421,7 @@ Here's the list of available endpoints for this plugin.
 
 ## Get User
 
-`GET /api/auth/me`
+`GET /api/mall/auth/me`
 
 **Middleware**
 

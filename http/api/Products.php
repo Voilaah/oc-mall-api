@@ -153,8 +153,8 @@ class Products extends Controller implements ResourceInterface
         //         'Voilaah.MallApi: A :slug URL parameter is needed when selecting products by category slug.'
         //     );
         // }
-
-        return Category::bySlugOrId($this->categorySlug, ":slug");
+        $isId = is_numeric($this->categorySlug) ? $this->categorySlug : ":slug";
+        return Category::bySlugOrId($this->categorySlug, $isId);
     }
 
 

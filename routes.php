@@ -2,7 +2,7 @@
 
 Route::group([
         'middleware' => ['web'],
-        'prefix' => 'api',
+        'prefix' => 'api/mall',
         'namespace' => 'Voilaah\MallApi\Http\Api'
     ], function () {
 
@@ -18,50 +18,135 @@ Route::group([
         Route::get(
             'profile',
             'CustomerController'
-        )->name('api.auth.customer');
+        )->name('customer.profile');
 
-        Route::resource('addresses', 'Addresses');
-        Route::resource('orders', 'Orders');
+        Route::resource('addresses', 'Addresses')
+            ->only([
+                'index',
+                'show'
+            ])
+            ->names([
+                'index' => 'customer.addresses.index',
+                'show' => 'customer.addresses.show'
+            ]);
+        Route::resource('orders', 'Orders')
+            ->only([
+                'index',
+                'show'
+            ])
+            ->names([
+                'index' => 'customer.orders.index',
+                'show' => 'customer.orders.show'
+            ]);
 
     });
 
+    Route::pattern('categorySlug', '.*');
+    Route::pattern('recordId', '.*');
+
     // Simple Resources related
+    Route::get('settings', 'Settings@show')->name('settings.show');
+    Route::resource('brands', 'Brands')
+        ->only([
+            'index',
+            'show'
+        ])
+        ->names([
+            'index' => 'brands.index',
+            'show' => 'brands.show'
+        ]);
+    Route::resource('payments', 'Payments')
+        ->only([
+            'index',
+            'show'
+        ])
+        ->names([
+            'index' => 'payments.index',
+            'show' => 'payments.show'
+        ]);
+    Route::resource('shippings', 'Shippings')
+        ->only([
+            'index',
+            'show'
+        ])
+        ->names([
+            'index' => 'shippings.index',
+            'show' => 'shippings.show'
+        ]);
 
-    // Route::get('properties/{categoryId}', 'PropertyGroups@show')
-    //     ->where('categoryId', '[0-9]+')
-    //     ->name('properties.show');
+    /**
+     * Products
+     */
 
-    Route::get('products/{recordId}', 'Products@show')
-        ->where('recordId', '[0-9]+')
-        ->name('products.show');
-    Route::get('products/{categorySlug}', 'Products@index')
-        ->where('categorySlug', '.*')
-        ->name('products.index');
-    Route::resource('products', 'Products');
-    Route::resource('variants', 'Variants');
-
-
-    // Route::get('categories/{recordId}/products', 'Products@index')
+    // Route::get('products/{id}', 'Products@show')
+    //     ->parameters([
+    //         'id' => 'recordId'
+    //     ])
     //     ->where('recordId', '[0-9]+')
-    //     ->name('categories.show');
-    // Route::get('categories/{recordId}/properties', 'Categories@showProperties')
-    //     ->where('recordId', '[0-9]+')
-    //     ->name('categories.show');
-    Route::get('categories/{recordId}', 'Categories@show')
-        ->where('recordId', '.*')
-        ->name('categories.show');
-    Route::resource('categories', 'Categories');
-    // Route::resource('categories', 'Categories')->only([
-    //     "index",
-    //     "store",
-    //     "update",
-    //     "destroy",
-    // ]);
-    Route::resource('brands', 'Brands');
-    // Route::resource('productscategory', 'ProductsCategory');
+    //     ->name('products.show');
 
-    // Cart related
-    // Route::get('cart/reset', 'ShoppingCartController@killme');
+    Route::get('products/category/{categorySlug}', 'Products@index')
+        ->name('products.bycategory');
+
+    Route::resource('products', 'Products')
+        ->parameters([
+            'products' => 'recordId'
+        ])
+        ->only([
+            "index",
+            "show",
+        ])
+        ->names([
+            'index' => 'products.index',
+            'show' => 'products.show'
+        ]);
+
+    /**
+     * Variants
+     */
+    Route::resource('variants', 'Variants')
+        ->parameters([
+            'variants' => 'recordId'
+        ])
+        ->only([
+            "index",
+            "show",
+        ])
+        ->names([
+            'index' => 'variants.index',
+            'show' => 'variants.show'
+        ]);
+
+
+    /**
+     * Categories
+     */
+
+    Route::get('categories/{recordId}/filters', function($recordId) {
+        return redirect()->route('categories.show', [ 'recordId' => $recordId, 'with' => 'property_groups,properties_values' ]);
+    })->name('categories.show.filters');
+
+    Route::get('categories/{categorySlug}/products', 'Products@index')
+        ->name('categories.show.products');
+
+    Route::resource('categories', 'Categories')
+        ->parameters([
+            'categories' => 'recordId'
+        ])
+        ->only([
+            "index",
+            "show",
+        ])
+        ->names([
+            'index' => 'categories.index',
+            'show' => 'categories.show'
+        ]);
+
+
+    /**
+     * Cart related
+     */
+
     Route::resource('cart', 'ShoppingCartController')->only([
         "index",
         "store",
