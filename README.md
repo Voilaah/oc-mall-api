@@ -69,7 +69,7 @@ Plugins Required:
 - [x] `GET /api/mall/products?brand={brandSlug}&on_sale=true` (Ex: /api/mall/products?brand=cruiser-bikes&on_sale=true)
 - [x] `GET /api/mall/products?price=700.00-1000.00`
 
-**Products by category**
+**Products by category and filters**
 - [x] `GET /api/mall/products/category/{categorySlug*}` (Ex: /api/mall/products/category/bikes or /api/mall/products/category/bikes/citybikes)
 - [x] `GET /api/mall/products/category/{categorySlug*}?sort=name_desc`
 - [x] `GET /api/mall/products/category/{categorySlug*}?gender=female` (Ex: /api/mall/products/category/bikes?gender=female)
