@@ -16,7 +16,9 @@ Plugins Required:
 
 ### Shop
 
-**Note**: `{slug*}` means either `{slug}` or `{slug1}/{slug2}`
+**Note**:
+`{slug*}` means a string following the pattern `{slug}` or `{slug1}/{slug2}`
+`{id}` means a numeric value
 
 - [ ] `GET /api/mall/settings`
 
