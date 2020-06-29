@@ -114,8 +114,8 @@ URL: `/api/mall/docs`
 
 ### Cart &amp; Checkout process
 
-- [ ] `GET /api/mall/cart`
-- [ ] `POST /api/mall/cart`
+- [x] `GET /api/mall/cart`
+- [x] `POST /api/mall/cart`
 - [ ] `PUT /api/mall/cart/{cartItemId}`
 - [ ] `DELETE /api/mall/cart/{cartItemId}`
 - [ ] `POST /api/mall/checkout`
