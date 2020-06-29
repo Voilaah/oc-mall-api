@@ -109,9 +109,7 @@ class ShoppingCartController extends Controller
 
     public function store()
     {
-        trace_log('store');
-
-        $cartEntry = null;
+        $cartItem = null;
         $this->cart = Cart::byUser($this->user);
 
         /* building the data */
@@ -137,12 +135,12 @@ class ShoppingCartController extends Controller
         }
 
         try {
-            $cartEntry = $this->cart->addProduct($this->product, $quantity, $variant, $values, $serviceOptions);
+            $cartItem = $this->cart->addProduct($this->product, $quantity, $variant, $values, $serviceOptions);
         } catch (OutOfStockException $e) {
             throw new ValidationException(['quantity' => trans('offline.mall::lang.common.stock_limit_reached')]);
         }
 
-        return new CartProductResource($cartEntry);
+        return new CartProductResource($cartItem);
 
         // return [
         //     'item'     => $this->dataLayerArray($product, $variant),

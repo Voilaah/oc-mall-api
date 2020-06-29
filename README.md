@@ -75,7 +75,7 @@ URL: `/api/mall/docs`
 - [x] `GET /api/mall/products?on_sale=true`
 - [x] `GET /api/mall/products?brand={brandSlug}` (Ex: /api/mall/products?brand=cruiser-bikes)
 - [x] `GET /api/mall/products?brand={brandSlug}&on_sale=true` (Ex: /api/mall/products?brand=cruiser-bikes&on_sale=true)
-- [x] `GET /api/mall/products?price=700.00-1000.00`
+- [x] `GET /api/mall/products?price=700.00-1000.00` (range value)
 
 **Products by category and filters**
 - [x] `GET /api/mall/products/category/{categorySlug*}` (Ex: /api/mall/products/category/bikes or /api/mall/products/category/bikes/citybikes)
