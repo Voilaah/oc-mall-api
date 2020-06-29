@@ -1,5 +1,16 @@
 {
+    "name": "voilaah/mallapi",
+    "autoload": {
+        "psr-4": {
+            "Voilaah\\MallApi\\Tests\\": "tests/"
+        }
+    },
     "require": {
         "league/fractal": "^0.18.0"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.7",
+        "mockery/mockery": "~1.0",
+        "phpunit/phpunit": "~6.5"
     }
 }

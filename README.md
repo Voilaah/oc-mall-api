@@ -27,6 +27,10 @@ Plugins Required:
 
 ---
 
+### Full Documentation
+
+URL: `/api/mall/docs`
+
 ### Shop
 
 **Settings**

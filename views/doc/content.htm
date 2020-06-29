@@ -185,6 +185,9 @@ Return the detail of a product with the relations `variants`, `categories`, `bra
 #### Add a single item into the cart
 `POST /api/mall/cart`
 
+#### Add a single product to current cart
+`POST /api/mall/cart`
+
 #### Update an existing cart item
 `PUT /api/mall/cart/{cartItemId}`
 
@@ -202,6 +205,111 @@ Return the detail of a product with the relations `variants`, `categories`, `bra
 
 #### List all discounts
 `GET /api/mall/discounts`
+
+
+<a name="cart"></a>
+## Cart
+
+#### Get the current cart
+`GET /api/mall/cart`
+
+
+### Responses
+
+**SUCCESS**
+
+> Code: 200
+
+```json
+{
+    "version": "v1",
+    "resource": "cart",
+    "path": "api/mall/cart",
+    "data": {
+        "id": 2,
+        "session_id": "goMddEufn5epcDX1HAj2P9Mwz3vYSyhikIarcoLyC2LsZLA65SAzhfezpUSVr0MvTxF40VfylVyQfsBWB19eIDuOZw0ZJvdeZIuO",
+        "customer_id": null, /* means an anonymous cart */
+        "shipping_address_id": null,
+        "billing_address_id": null,
+        "shipping_method_id": 1,
+        "payment_method_id": null,
+        "items": [
+            {
+                "id": 1,
+                "cart_id": 2,
+                "product_id": 1,
+                "variant_id": 3,
+                "quantity": 1,
+                "weight": 9000,
+                "price": {
+                    "USD": 895,
+                    "EUR": 795,
+                    "CHF": 899
+                },
+                "created_at": 1593409835,
+                "updated_at": 1593409835
+            }
+        ],
+        "created_at": 1593407728,
+        "updated_at": 1593407728
+    }
+}
+```
+
+
+#### Add a single item into the cart
+`POST /api/mall/cart`
+
+
+### Parameters
+
+| Name                   | Type   | Required | Description               |
+|------------------------|--------|----------|---------------------------|
+| product_id             | int    | Yes      | product ID                |
+| variant_id             | int    | No       | variant ID                |
+| quantity               | int    | Yes      | Quantity > 0              |
+| shipping_method_id     | int    | Yes      | Shipping method           |
+| service_options        | array  | Yes      | services options          |
+
+### Responses
+
+**SUCCESS**
+
+> Code: 200
+
+```json
+{
+    "data": {
+        "id": 1,
+        "cart_id": 2,
+        "product_id": 1,
+        "variant_id": 3,
+        "quantity": 1,
+        "weight": 9000,
+        "price": {
+            "USD": 895,
+            "EUR": 795,
+            "CHF": 899
+        },
+        "created_at": 1593409835,
+        "updated_at": 1593409835
+    }
+}
+```
+
+
+
+#### Add a single product to current cart
+`POST /api/mall/cart`
+
+#### Update an existing cart item
+`PUT /api/mall/cart/{cartItemId}`
+
+#### Delete an existing cart item
+`DELETE /api/mall/cart/{cartItemId}`
+
+#### Reset the whole cart
+`DELETE /api/mall/cart`
 
 
 <a name="authentication"></a>

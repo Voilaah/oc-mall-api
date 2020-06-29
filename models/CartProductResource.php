@@ -16,7 +16,15 @@ Class CartProductResource extends Resource
     public function toArray($request)
     {
         return [
-            'session_id' => $this->session_id,
+            'id'                    => $this->id,
+            'cart_id'               => $this->cart_id,
+            'product_id'            => $this->product_id,
+            'variant_id'            => $this->variant_id,
+            'quantity'              => (int)$this->quantity,
+            'weight'                => (int)$this->weight,
+            'price'                 => $this->price,
+            'created_at'            => (int)$this->created_at->timestamp,
+            'updated_at'            => (int)$this->updated_at->timestamp,
         ];
     }
 }
