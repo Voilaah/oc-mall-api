@@ -48,16 +48,16 @@ URL: `/api/mall/docs`
 - [x] `GET /api/mall/brands`
 - [x] `GET /api/mall/brands/{slug*}` or `GET /api/mall/brands/{id}`
 
-**Discounts**
+**Discounts list**
 - [ ] `GET /api/mall/discounts`
 
-**Categories**
+**Categories list**
 - [x] `GET /api/mall/categories`
 - [x] `GET /api/mall/categories/{slug*}` OR `GET /api/mall/categories/{id}`
 - [x] `GET /api/mall/categories/{slug*}/filters` OR `GET /api/mall/categories/{id}/filters`
 - [x] `GET /api/mall/categories/{slug*}/products` OR `GET /api/mall/categories/{id}/products`
 
-**Products**
+**Products list**
 - [x] `GET /api/mall/products`
 
 **Products sorting options**
@@ -90,6 +90,15 @@ URL: `/api/mall/docs`
 
 
 
+### Cart &amp; Checkout process
+
+- [x] `GET /api/mall/cart`
+- [x] `POST /api/mall/cart`
+- [ ] `PUT /api/mall/cart/{cartItemId}`
+- [ ] `DELETE /api/mall/cart/{cartItemId}`
+- [ ] `POST /api/mall/checkout`
+
+
 ### Authentication and customers profiles
 
 - [x] `POST /api/mall/auth/register`
@@ -112,13 +121,6 @@ URL: `/api/mall/docs`
 - [ ] `DELETE /api/mall/auth/me/wishlist/{id}`
 
 
-### Cart &amp; Checkout process
-
-- [x] `GET /api/mall/cart`
-- [x] `POST /api/mall/cart`
-- [ ] `PUT /api/mall/cart/{cartItemId}`
-- [ ] `DELETE /api/mall/cart/{cartItemId}`
-- [ ] `POST /api/mall/checkout`
 
 ### Routes caching
 
