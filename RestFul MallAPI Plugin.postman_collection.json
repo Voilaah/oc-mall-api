@@ -1,0 +1,780 @@
+{
+	"info": {
+		"_postman_id": "aa6aa0ca-7188-465b-a258-0ea7f443fc93",
+		"name": "RestFul MallAPI Plugin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login (w/ username)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"login\": \"rluders\",\n\t\"password\": \"secret\"\n}"
+						},
+						"url": {
+							"raw": "http://octobercms.localhost/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"octobercms",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login (w/ email)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"login\": \"demo@domain.tld\",\n\t\"password\": \"secret\"\n}"
+						},
+						"url": {
+							"raw": "http://octobercms.localhost/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"octobercms",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"demo\",\n\t\"email\": \"demo@domain.tld\",\n\t\"password\": \"secret\",\n\t\"password_confirmation\": \"secret\"\n}"
+						},
+						"url": {
+							"raw": "http://octobercms.localhost/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"octobercms",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Account activation",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"activation_code\": \"put-the-activation-code-here\"\n}"
+						},
+						"url": {
+							"raw": "http://octobercms.localhost/api/auth/account-activation",
+							"protocol": "http",
+							"host": [
+								"octobercms",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"account-activation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Forgot password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"demo@domain.tld\"\n}"
+						},
+						"url": {
+							"raw": "http://octobercms.localhost/api/auth/forgot-password",
+							"protocol": "http",
+							"host": [
+								"octobercms",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"password\": \"secret2\",\n\t\"password_confirmation\": \"secret2\",\n\t\"reset_password_code\": \"put-the-password-reset-code-here\"\n}"
+						},
+						"url": {
+							"raw": "http://octobercms.localhost/api/auth/reset-password",
+							"protocol": "http",
+							"host": [
+								"octobercms",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer put-yout-jwt-token-here"
+							}
+						],
+						"url": {
+							"raw": "http://octobercms.localhost/api/auth/me",
+							"protocol": "http",
+							"host": [
+								"octobercms",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh token",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer put-your-jwt-token-here"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://octobercms.localhost/api/auth/refresh_token",
+							"protocol": "http",
+							"host": [
+								"octobercms",
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"refresh_token"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Customers",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "General",
+			"item": [
+				{
+					"name": "Settings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/settings",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"settings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "payments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/payments",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Shippings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/shippings",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"shippings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Discounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/discounts",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"discounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Brands",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/brands",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"brands"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/categories",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categories details by slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/categories/bikes/mountainbikes",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"categories",
+								"bikes",
+								"mountainbikes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categories details by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/categories/1",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category filters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/categories/bikes/mountainbikes/filters",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"categories",
+								"bikes",
+								"mountainbikes",
+								"filters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/categories/bikes/mountainbikes/products",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"categories",
+								"bikes",
+								"mountainbikes",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category products with category filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/categories/bikes/products?gender=female",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"categories",
+								"bikes",
+								"products"
+							],
+							"query": [
+								{
+									"key": "gender",
+									"value": "female"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/products",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products with sort",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/products?sort=bestseller",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"products"
+							],
+							"query": [
+								{
+									"key": "sort",
+									"value": "bestseller"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products with onsale filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/products?on_sale=true",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"products"
+							],
+							"query": [
+								{
+									"key": "on_sale",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products with brand filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/products?brand=cruiser-bikes",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"products"
+							],
+							"query": [
+								{
+									"key": "brand",
+									"value": "cruiser-bikes"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Products with price range filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/products?price=700.00-1000.00",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"products"
+							],
+							"query": [
+								{
+									"key": "price",
+									"value": "700.00-1000.00"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category Products with category filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/products/category/bikes?gender=female",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"products",
+								"category",
+								"bikes"
+							],
+							"query": [
+								{
+									"key": "gender",
+									"value": "female"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product detail by slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/products/cruiser-1000",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"products",
+								"cruiser-1000"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product detail by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/products/1",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "variant details by slug",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://oc-shop.local/api/mall/products/cruiser-1000/PDWKpMnv",
+							"protocol": "http",
+							"host": [
+								"oc-shop",
+								"local"
+							],
+							"path": [
+								"api",
+								"mall",
+								"products",
+								"cruiser-1000",
+								"PDWKpMnv"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Cart",
+			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Checkout",
+			"item": [],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "140dc7d0-d0be-4581-849e-2740adec2a8d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "eb82468a-f2f6-4cca-848b-0a5d91b8fa5c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
