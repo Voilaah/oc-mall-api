@@ -33,9 +33,15 @@ class ShoppingCartController extends Controller
 
     use ApiTrait;
 
+    public const DEFAULT_RETURN_CART = 'cart';
+
+    public const DEFAULT_RETURN_ITEM = 'item';
+
     protected $user;
 
     protected $cart;
+
+    protected $cartItem;
 
     /**
      * Send the forgot password request
@@ -109,7 +115,7 @@ class ShoppingCartController extends Controller
 
     public function store()
     {
-        $cartItem = null;
+        $this->cartItem = null;
         $this->cart = Cart::byUser($this->user);
 
         /* building the data */
@@ -135,12 +141,14 @@ class ShoppingCartController extends Controller
         }
 
         try {
-            $cartItem = $this->cart->addProduct($this->product, $quantity, $variant, $values, $serviceOptions);
+            $this->cartItem = $this->cart->addProduct($this->product, $quantity, $variant, $values, $serviceOptions);
         } catch (OutOfStockException $e) {
             throw new ValidationException(['quantity' => trans('offline.mall::lang.common.stock_limit_reached')]);
         }
 
-        return new CartProductResource($cartItem);
+        $returnAsked = input('return_asked') ? : self::DEFAULT_RETURN_ITEM;
+
+        return $this->returnAsked($returnAsked);
 
         // return [
         //     'item'     => $this->dataLayerArray($product, $variant),
@@ -152,14 +160,63 @@ class ShoppingCartController extends Controller
         // ];
     }
 
-    public function update()
+    /**
+     * [update description]
+     * @param  [type] $cartItemId [description]
+     * @return [type]             [description]
+     */
+    public function update($cartItemId = null)
     {
-        trace_log('update');
+        // trace_log('update ' . $cartItemId);
+
+        $id = $this->decode($cartItemId);
+
+        $this->cart     = CartModel::byUser($this->user);
+        $product        = $this->getProductFromCart($this->cart, $id);
+
+        try {
+            $this->cart->setQuantity($product->id, (int)input('quantity'));
+        } catch (OutOfStockException $e) {
+            new ValidationException(trans('offline.mall::lang.common.out_of_stock', ['quantity' => $e->product->stock]));
+            return;
+        } finally {
+            $this->setData();
+        }
+
+        $returnAsked = input('return_asked') ? : self::DEFAULT_RETURN_ITEM;
+
+        if ($returnAsked == self::DEFAULT_RETURN_ITEM)
+            $this->cartItem = $this->products->find($cartProductId);
+
+        return $this->returnAsked($returnAsked);
     }
 
-    public function destroy()
+    /**
+     * [destroy description]
+     * @return [type] [description]
+     */
+    public function destroy($cartItemId = null)
     {
-        trace_log('destroy');
+        // trace_log('remove from cart ' . $cartItemId);
+
+        $id = $this->decode($cartItemId);
+
+        $cart = CartModel::byUser($this->user);
+
+        $product = $this->getProductFromCart($cart, $id);
+
+        $cart->removeProduct($product);
+
+        $this->setData();
+
+        return $this->returnAsked(self::DEFAULT_RETURN_CART);
+
+        // return [
+        //     'item'     => $this->dataLayerArray($product->product, $product->variant),
+        //     'quantity' => $product->quantity,
+        //     'new_items_count' => optional($cart->products)->count() ?? 0,
+        //     'new_items_quantity' => optional($cart->products)->sum('quantity') ?? 0,
+        // ];
     }
 
     /**

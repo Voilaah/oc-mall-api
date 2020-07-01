@@ -2,7 +2,7 @@
 
 namespace Voilaah\MallApi\Models;
 
-use Model;
+
 use Illuminate\Http\Resources\Json\Resource;
 use Voilaah\MallApi\Behaviors\RestController;
 use Voilaah\MallApi\Interfaces\ResourceInterface;

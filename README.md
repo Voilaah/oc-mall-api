@@ -12,6 +12,32 @@ Plugins Required:
 **This API is based on the first version of this plugin https://github.com/SaifurRahmanMohsin/oc-rest-plugin**
 
 
+<a name="features"></a>
+
+# API Features
+
+- Retrieve settings.
+- Retrieve discounts.
+- Retrieve shippings methods.
+- Retrieve payment methods.
+- Retrieve brands.
+- Retrieve categories.
+- Retrieve properties for filtering means.
+- Retrieve products.
+- Retrieve a logged-in user or guest cart.
+- Retrieve the cart totals.
+- View the cart contents.
+- Add simple and variants products to the cart
+- Update items in the cart.
+- Remove items from the cart.
+- Empty the cart.
+- Loging customer.
+- Logout customer.
+- Supports guest customers.
+- Supports JWT authentication.
+- Supports Web authentication without the need to cookie authenticate.
+
+
 <a name="overview"></a>
 # API Overview
 
@@ -92,10 +118,13 @@ URL: `/api/mall/docs`
 
 ### Cart &amp; Checkout process
 
+**cart operations**
 - [x] `GET /api/mall/cart`
 - [x] `POST /api/mall/cart`
-- [ ] `PUT /api/mall/cart/{cartItemId}`
-- [ ] `DELETE /api/mall/cart/{cartItemId}`
+- [x] `PUT /api/mall/cart/{cartItemId}`
+- [x] `DELETE /api/mall/cart/{cartItemId}`
+
+**checkout**
 - [ ] `POST /api/mall/checkout`
 
 

@@ -54,6 +54,7 @@ class ProductTransformer extends TransformerAbstract
                 'quantity' => (int)$model->quantity,
                 'allow_out_of_stock_purchases' => (boolean)$model->allow_out_of_stock_purchases,
                 'is_published' => (boolean)$model->published,
+                'is_virtual'    => (boolean)$model->is_virtual,
                 'url' =>  route('products.show', ['slug' => $model->slug]),
                 // 'url_slug' =>  route('products.show', ['slug' => $model->nestedSlug]),
                 'created_at' => $model->created_at->timestamp,

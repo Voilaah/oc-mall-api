@@ -210,6 +210,8 @@ Return the detail of a product with the relations `variants`, `categories`, `bra
 #### Get the current cart
 `GET /api/mall/cart`
 
+Retrieve a logged-in user or guest user.
+
 
 ### Responses
 
@@ -260,13 +262,14 @@ Return the detail of a product with the relations `variants`, `categories`, `bra
 
 ### Parameters
 
-| Name                   | Type   | Required | Description               |
-|------------------------|--------|----------|---------------------------|
-| product_id             | int    | Yes      | product ID                |
-| variant_id             | int    | No       | variant ID                |
-| quantity               | int    | Yes      | Quantity > 0              |
-| shipping_method_id     | int    | Yes      | Shipping method           |
-| service_options        | array  | Yes      | services options          |
+| Name                   | Type    | Required | Description                     |
+|------------------------|---------|----------|---------------------------------|
+| product_id             | int     | Yes      | product ID                      |
+| variant_id             | int     | No       | variant ID                      |
+| quantity               | int     | Yes      | Quantity > 0                    |
+| shipping_method_id     | int     | Yes      | Shipping method                 |
+| service_options        | array   | Yes      | services options                |
+| return_asked           | string  | Yes      | return value: "cart" or "item"  |
 
 ### Responses
 
@@ -299,8 +302,33 @@ Return the detail of a product with the relations `variants`, `categories`, `bra
 #### Update an existing cart item
 `PUT /api/mall/cart/{cartItemId}`
 
+### Parameters
+
+| Name                   | Type    | Required | Description                     |
+|------------------------|---------|----------|---------------------------------|
+| quantity               | int     | Yes      | Quantity > 0                    |
+| shipping_method_id     | int     | Yes      | Shipping method                 |
+| service_options        | array   | Yes      | services options                |
+| notes                  | string  | No       | customer notes (not available)  |
+| return_asked           | string  | Yes      | return value: "cart" or "item"  |
+
+### Responses
+
+**SUCCESS**
+
+> Code: 200
+
+
+
 #### Delete an existing cart item
 `DELETE /api/mall/cart/{cartItemId}`
+
+### Responses
+
+**SUCCESS**
+
+> Code: 200
+
 
 #### Reset the whole cart
 `DELETE /api/mall/cart`
